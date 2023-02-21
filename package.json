@@ -1,0 +1,26 @@
+{
+  "name": "ts-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "postbuild": "copy /Y \"package.json\" \"build-dist/package.json\" && copy /Y \".env\" \"build-dist/.env\"",
+    "start": "node build-dist/index.js",
+
+    "dev": "if not exist \"build-dev\" mkdir \"build-dev\"",
+    "postdev": "copy /Y \".env\" \"build-dev/.env\" && concurrently \"tsc -w --project tsconfig.dev.json\" \"cd build-dev && nodemon index.js\""
+  },
+  "keywords": [],
+  "author": "Kevin Soulh",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5",
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20"
+  }
+}
