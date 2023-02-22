@@ -8,7 +8,6 @@ import {
     StringSelectMenuBuilder, 
     EmbedBuilder, 
     ActionRowBuilder, 
-    ImageURLOptions,
 } from 'discord.js'
 
 module.exports = {
