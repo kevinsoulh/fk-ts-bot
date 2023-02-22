@@ -10,6 +10,7 @@ export class ExtendedClient extends Client {
 
     handleCommands: () => void | Promise<void> = () => {};
     handleEvents: () => void | Promise<void> = () => {};
+    handleWaitingChannel: () => void | Promise<void> = () => {};
 
     distube: any = new Object();
     emotes: { play: string; success: string; error: string; } = {
@@ -52,6 +53,7 @@ client.distube = new DisTube(client, {
     plugins: [new SpotifyPlugin()]
 });
 
+client.handleWaitingChannel();
 client.handleCommands();
 client.handleEvents();
 client.login(config.DISCORD_TOKEN);
