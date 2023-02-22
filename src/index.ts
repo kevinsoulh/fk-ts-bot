@@ -1,6 +1,8 @@
 import { Client, Collection, GatewayIntentBits } from 'discord.js';
 import * as fs from 'fs';
 import config from './config.js';
+import DisTube from 'distube';
+import { SpotifyPlugin } from '@distube/spotify';
 
 export class ExtendedClient extends Client {
     commands = new Collection<string, any>();
@@ -8,6 +10,13 @@ export class ExtendedClient extends Client {
 
     handleCommands: () => void | Promise<void> = () => {};
     handleEvents: () => void | Promise<void> = () => {};
+
+    distube: any = new Object();
+    emotes: { play: string; success: string; error: string; } = {
+        play: '▶️',
+        success: '✅',
+        error: '⛔'
+    } as any;
 }
 
 const client = new ExtendedClient({
@@ -19,6 +28,7 @@ const client = new ExtendedClient({
         GatewayIntentBits.GuildPresences,
         GatewayIntentBits.DirectMessages,
         GatewayIntentBits.GuildModeration,
+        GatewayIntentBits.GuildVoiceStates,
     ]
 });
 
@@ -34,6 +44,13 @@ for (const folder of functionFolders) {
     }
 
 }
+
+client.distube = new DisTube(client, {
+    emitNewSongOnly: true,
+    leaveOnFinish: true,
+    emitAddSongWhenCreatingQueue: false,
+    plugins: [new SpotifyPlugin()]
+});
 
 client.handleCommands();
 client.handleEvents();

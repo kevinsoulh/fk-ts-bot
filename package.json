@@ -1,5 +1,5 @@
 {
-  "name": "ts-bot",
+  "name": "fk-ts-bot",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,20 +7,35 @@
     "build": "tsc",
     "postbuild": "copy /Y \"package.json\" \"build-dist/package.json\" && copy /Y \".env\" \"build-dist/.env\"",
     "start": "node build-dist/index.js",
-
     "dev": "if not exist \"build-dev\" mkdir \"build-dev\"",
     "postdev": "copy /Y \".env\" \"build-dev/.env\" && concurrently \"tsc -w --project tsconfig.dev.json\" \"cd build-dev && nodemon index.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinsoulh/ts-bot.git"
   },
   "keywords": [],
   "author": "Kevin Soulh",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kevinsoulh/ts-bot/issues"
+  },
+  "homepage": "https://github.com/kevinsoulh/ts-bot#readme",
   "dependencies": {
+    "@discordjs/opus": "^0.8.0",
+    "@discordjs/voice": "^0.14.0",
+    "@distube/spotify": "^1.5.1",
     "discord.js": "^14.7.1",
-    "dotenv": "^16.0.3"
+    "distube": "^4.0.4",
+    "dotenv": "^16.0.3",
+    "ffmpeg-static": "^4.4.1",
+    "libsodium-wrappers": "^0.7.11",
+    "yt-search": "^2.10.4"
   },
   "devDependencies": {
-    "typescript": "^4.9.5",
+    "@types/yt-search": "^2.3.2",
     "concurrently": "^7.6.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "typescript": "^4.9.5"
   }
 }
