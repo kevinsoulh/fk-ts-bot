@@ -7,8 +7,8 @@ module.exports = {
     async execute(client: ExtendedClient) {
         client.user?.setPresence({
             activities: [{
-                name: 'Test',
-                type: ActivityType.Playing
+                name: 'F&K',
+                type: ActivityType.Watching
             }],
             status: 'online'
         })
