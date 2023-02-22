@@ -1,4 +1,5 @@
-import config from '../../config';
+import dotenv from 'dotenv';
+dotenv.config();
 import { ExtendedClient } from '../..';
 import request from 'request';
 import { 
@@ -16,7 +17,7 @@ module.exports = {
     .setDescription("Finds a movie based on the genre."),
     
 	async execute(interaction: CommandInteraction & { options: CommandInteractionOptionResolver }, client: ExtendedClient) {
-        const API_KEY = config.API_KEY;
+        const API_KEY = process.env.API_KEY;
 
         const genres = [
             {id: '28', name: 'Action'},

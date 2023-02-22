@@ -1,7 +1,4 @@
-import config from '../../config';
-import { setTimeout } from 'node:timers/promises';
 import { ExtendedClient } from '../..';
-import * as ytsr from 'yt-search';
 import { 
     Events,
     CommandInteractionOptionResolver, 

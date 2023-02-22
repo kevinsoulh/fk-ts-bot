@@ -1,4 +1,3 @@
-import config from '../../config';
 import { ExtendedClient } from '../../';
 import { ActivityType } from 'discord.js';
 

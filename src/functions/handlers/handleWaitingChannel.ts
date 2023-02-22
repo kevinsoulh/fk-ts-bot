@@ -1,5 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import { ExtendedClient } from '../../';
-import config from '../../config';
 import { Events } from 'discord.js';
 
 module.exports = async (client: ExtendedClient) => {
@@ -10,14 +11,14 @@ module.exports = async (client: ExtendedClient) => {
 
             if (oldUserChannel === null && newUserChannel !== null) {
 
-                if(newUserChannel.id === config.waitingChannelId) {
+                if(newUserChannel.id === process.env.waitingChannelId) {
 
                     // User joins a voice channel
                     handleVoiceChannel(newUserChannel);
                 }
             } else if(oldUserChannel !== null && newUserChannel !== null) {
 
-                if(newUserChannel.id === config.waitingChannelId) {
+                if(newUserChannel.id === process.env.waitingChannelId) {
 
                     // User was moved from one channel to another
                     handleVoiceChannel(newUserChannel);
@@ -32,7 +33,7 @@ module.exports = async (client: ExtendedClient) => {
         if(members.size > 1) {
 
             // Move all users to a different voice channel
-            let targetVoiceChannel = client.channels.cache.get(config.justTalkingChannelId);
+            let targetVoiceChannel = client.channels.cache.get(process.env.justTalkingChannelId || '');
             if(!targetVoiceChannel) return console.error("The target voice channel does not exist");
             for(let member of members.values()) {
                 await member.voice.setChannel(targetVoiceChannel);

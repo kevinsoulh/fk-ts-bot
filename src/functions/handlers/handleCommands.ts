@@ -1,5 +1,6 @@
 
-import config from '../../config';
+import dotenv from 'dotenv';
+dotenv.config();
 import { REST, Routes } from 'discord.js' ;
 import * as fs from 'fs';
 import { ExtendedClient } from '../../';
@@ -23,13 +24,13 @@ module.exports = async (client: ExtendedClient) => {
             }
         }
         
-        const rest = new REST({ version: '10' }).setToken(config.DISCORD_TOKEN);
+        const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN || '');
 
         try{
             console.log(`Started refreshing ${client.commandArray.length} application (/) commands.`);
 
             const data = await rest.put(
-                Routes.applicationGuildCommands(config.CLIENT_ID, config.GUILD_ID),
+                Routes.applicationGuildCommands(process.env.CLIENT_ID || '', process.env.GUILD_ID || ''),
                 { body: client.commandArray },
             ) as any[];
 

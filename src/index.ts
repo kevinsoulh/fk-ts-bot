@@ -1,6 +1,7 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import { Client, Collection, GatewayIntentBits } from 'discord.js';
 import * as fs from 'fs';
-import config from './config.js';
 import DisTube from 'distube';
 import { SpotifyPlugin } from '@distube/spotify';
 
@@ -56,4 +57,4 @@ client.distube = new DisTube(client, {
 client.handleWaitingChannel();
 client.handleCommands();
 client.handleEvents();
-client.login(config.DISCORD_TOKEN);
+client.login(process.env.DISCORD_TOKEN);
