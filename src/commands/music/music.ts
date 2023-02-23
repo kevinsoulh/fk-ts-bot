@@ -78,6 +78,16 @@ module.exports = {
         try{
             switch(subcommand) {
                 case 'play':
+
+                    if(guild?.members.me?.voice.channelId !== null) {
+                        if(member.voice.channelId !== guild?.members.me?.voice.channelId) {
+                            embed.setColor('Red')
+                            embed.setDescription(`You can't use music commands here as the bot is already active on <#${guild?.members.me?.voice.channelId}>`)
+                            return await interaction.reply({ embeds: [embed], ephemeral: true });
+                        }
+    
+                    }
+                    
                     client.distube.play(voiceChannel, query, { textChannel: channel, member: member });
                     await interaction.reply({ content: `🎶 Request received.` })
                     break;
